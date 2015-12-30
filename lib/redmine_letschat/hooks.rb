@@ -22,6 +22,29 @@ module RedmineLetsChatProjects
       send_message( data )
     end
 
+    def controller_issues_edit_after_save(context = {})
+      issue = context[:issue]
+      project = issue.project
+
+      return if issue.is_private?
+      return if !configured?(project)
+      return if !project.lets_chat_notify_update
+
+      msg = "[#{I18n.t(:lets_chat_caption_issues_edit)}][#{escape(issue.project)}] <#{escape(issue)}>\n" +
+      "#{I18n.t(:lets_chat_caption_url)} : #{get_url(issue)}\n" +
+      "#{I18n.t(:lets_chat_caption_priority)} : #{escape(issue.priority.to_s)}\n" +
+      "#{I18n.t(:lets_chat_caption_author)} : #{escape(issue.author)}\n" +
+      "#{I18n.t(:lets_chat_caption_assigned_to)} : #{escape(issue.assigned_to.to_s)}\n"
+
+      data = {}
+      data[:msg] = msg
+      data[:url] = project.lets_chat_url
+      data[:token] = project.lets_chat_token
+      data[:room] = project.lets_chat_room
+
+      send_message( data )
+    end
+
     private
     def configured?(project)
       if !project.lets_chat_url.empty? && !project.lets_chat_token.empty? && !project.lets_chat_room.empty?

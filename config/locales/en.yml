@@ -1,0 +1,10 @@
+en:
+  field_lets_chat_url: "Let's Chat URL"
+  field_lets_chat_token: "Let's Chat Token"
+  field_lets_chat_room: "Lets's Chat Room ID"
+  field_lets_chat_notify_update: "notify message When issues are updated"
+  lets_chat_caption_issues_new: "Registered"
+  lets_chat_caption_url: "URL"
+  lets_chat_caption_priority: "Priority"
+  lets_chat_caption_author: "Author"
+  lets_chat_caption_assigned_to: "AssignedTo"
